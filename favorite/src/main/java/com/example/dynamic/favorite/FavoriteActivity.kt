@@ -1,14 +1,16 @@
-package com.example.githubappclean.favorite
+package com.example.dynamic.favorite
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dynamic.favorite.databinding.ActivityFavoriteBinding
+import com.example.dynamic.favorite.di.favoritesModule
 import com.example.module.core.data.source.remote.response.SimpleUser
 import com.example.module.core.ui.SearchAdapter
-import com.example.githubappclean.databinding.ActivityFavoriteBinding
 import com.example.githubappclean.detail.DetailActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
 import kotlin.getValue
 
 class FavoriteActivity : AppCompatActivity() {
@@ -19,6 +21,8 @@ class FavoriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        loadKoinModules(favoritesModule)
 
         favoriteViewModel.getFavoriteUsers().observe(this) { githubUser ->
             showRecycle(githubUser)

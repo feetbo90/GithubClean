@@ -21,10 +21,10 @@ import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.net.toUri
 import androidx.core.view.MenuProvider
 import androidx.navigation.fragment.findNavController
 import com.example.githubappclean.databinding.DialogSearchBinding
-import com.example.githubappclean.favorite.FavoriteActivity
 
 
 class MainFragment : Fragment() {
@@ -125,7 +125,8 @@ class MainFragment : Fragment() {
                     true
                 }
                 R.id.action_favorite -> {
-                    startActivity(Intent(requireContext(), FavoriteActivity::class.java))
+                    val uri = "github://favorites".toUri()
+                    startActivity(Intent(Intent.ACTION_VIEW, uri))
                     true
                 }
                 else -> false

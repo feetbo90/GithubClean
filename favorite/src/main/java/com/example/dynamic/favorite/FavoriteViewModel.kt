@@ -1,4 +1,4 @@
-package com.example.githubappclean.favorite
+package com.example.dynamic.favorite
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

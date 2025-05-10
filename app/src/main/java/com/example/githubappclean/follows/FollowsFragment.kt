@@ -12,9 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubappclean.MainActivity
-import com.example.githubappclean.core.data.Resource
-import com.example.githubappclean.core.data.source.remote.response.SimpleUser
-import com.example.githubappclean.core.ui.FollowsAdapter
+import com.example.module.core.data.Resource
+import com.example.module.core.data.source.remote.response.SimpleUser
+import com.example.module.core.ui.FollowsAdapter
 import com.example.githubappclean.databinding.FragmentFollowsBinding
 import com.example.githubappclean.detail.DetailActivity
 import kotlinx.coroutines.launch

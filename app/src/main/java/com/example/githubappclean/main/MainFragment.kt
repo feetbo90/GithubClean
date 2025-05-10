@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubappclean.R
-import com.example.githubappclean.core.domain.model.UserGithub
-import com.example.githubappclean.core.ui.GithubAdapter
+import com.example.module.core.domain.model.UserGithub
+import com.example.module.core.ui.GithubAdapter
 import com.example.githubappclean.databinding.FragmentMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import com.example.githubappclean.core.data.Resource
+import com.example.module.core.data.Resource
 import com.example.githubappclean.detail.DetailActivity
 import android.content.Intent
 import android.view.Menu
@@ -160,7 +160,6 @@ class MainFragment : Fragment() {
         }
         dialog.show()
     }
-
 
     companion object {
         const val PARCEL_LOGIN = "parcel_login"

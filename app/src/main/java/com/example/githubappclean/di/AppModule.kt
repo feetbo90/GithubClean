@@ -1,7 +1,7 @@
 package com.example.githubappclean.di
 
-import com.example.githubappclean.core.domain.usecase.GithubInteractor
-import com.example.githubappclean.core.domain.usecase.GithubUseCase
+import com.example.module.core.domain.usecase.GithubInteractor
+import com.example.module.core.domain.usecase.GithubUseCase
 import com.example.githubappclean.detail.DetailViewModel
 import com.example.githubappclean.favorite.FavoriteViewModel
 import com.example.githubappclean.follows.FollowsViewModel

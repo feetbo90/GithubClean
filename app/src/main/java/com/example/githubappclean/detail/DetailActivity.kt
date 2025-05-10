@@ -13,10 +13,10 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.githubappclean.MainActivity
 import com.example.githubappclean.R
-import com.example.githubappclean.core.data.Resource
-import com.example.githubappclean.core.data.source.remote.response.User
-import com.example.githubappclean.core.ui.SectionPageAdapter
+import com.example.module.core.data.Resource
+import com.example.module.core.data.source.remote.response.User
 import com.example.githubappclean.databinding.ActivityDetailBinding
+import com.example.githubappclean.follows.SectionPageAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch

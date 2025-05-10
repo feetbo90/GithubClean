@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubappclean.core.data.source.remote.response.SimpleUser
-import com.example.githubappclean.core.ui.SearchAdapter
+import com.example.module.core.data.source.remote.response.SimpleUser
+import com.example.module.core.ui.SearchAdapter
 import com.example.githubappclean.databinding.ActivityFavoriteBinding
 import com.example.githubappclean.detail.DetailActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel

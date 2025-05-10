@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubappclean.MainActivity
 import com.example.githubappclean.MainActivity.Companion.PARCEL_LOGIN
 import com.example.githubappclean.R
-import com.example.githubappclean.core.data.Resource
-import com.example.githubappclean.core.data.source.remote.response.SimpleUser
-import com.example.githubappclean.core.ui.SearchAdapter
+import com.example.module.core.data.Resource
+import com.example.module.core.data.source.remote.response.SimpleUser
+import com.example.module.core.ui.SearchAdapter
 import com.example.githubappclean.databinding.FragmentSearchBinding
 import com.example.githubappclean.detail.DetailActivity
 import kotlinx.coroutines.launch

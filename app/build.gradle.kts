@@ -30,7 +30,6 @@ android {
             )
         }
         debug {
-            buildConfigField("String", "MY_BASE_URL", "\"https://api.github.com/\"")
         }
     }
     compileOptions {

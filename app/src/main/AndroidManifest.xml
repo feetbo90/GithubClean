@@ -19,9 +19,6 @@
             android:name=".favorite.FavoriteActivity"
             android:exported="false" />
         <activity
-            android:name=".search.SearchActivity"
-            android:exported="false" />
-        <activity
             android:name=".detail.DetailActivity"
             android:exported="false" />
         <activity

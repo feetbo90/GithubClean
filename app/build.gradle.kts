@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     id("kotlin-parcelize")
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -30,6 +31,8 @@ android {
             )
         }
         debug {
+            buildConfigField("String", "MY_API_TOKEN", "\"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\"")
+            buildConfigField("String", "MY_BASE_URL", "\"https://api.github.com/\"")
         }
     }
     compileOptions {

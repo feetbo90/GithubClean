@@ -93,12 +93,14 @@ class DetailActivity : AppCompatActivity() {
                 errorOccurred()
                 binding.detailNoInternet.visibility = View.VISIBLE
                 binding.detailNoInternet.text = getString(R.string.error)
+                binding.favorite.visibility = View.INVISIBLE
                 showLoading(false)
             }
 
             is Resource.Success -> {
                 parseUserDetail(result.data)
                 setTabLayoutAdapter()
+                binding.favorite.visibility = View.VISIBLE
                 showLoading(false)
                 result.data.let { userDetail ->
                     inDetailUser = userDetail
@@ -144,6 +146,7 @@ class DetailActivity : AppCompatActivity() {
             binding.apply {
                 progressBar.visibility = View.VISIBLE
                 detailViewPager.visibility = View.INVISIBLE
+                binding.favorite.visibility = View.INVISIBLE
             }
         } else {
             binding.apply {

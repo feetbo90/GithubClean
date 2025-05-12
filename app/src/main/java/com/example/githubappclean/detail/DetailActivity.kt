@@ -13,10 +13,10 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.githubappclean.MainActivity
 import com.example.githubappclean.R
-import com.example.githubappclean.core.data.Resource
-import com.example.githubappclean.core.data.source.remote.response.User
-import com.example.githubappclean.core.ui.SectionPageAdapter
+import com.example.module.core.data.Resource
 import com.example.githubappclean.databinding.ActivityDetailBinding
+import com.example.githubappclean.follows.SectionPageAdapter
+import com.example.module.core.domain.model.DetailUser
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
@@ -30,7 +30,7 @@ class DetailActivity : AppCompatActivity() {
     private var id: Int? = null
     private val detailViewModel: DetailViewModel by viewModel()
     private var isFavorite: Boolean = false
-    private var inDetailUser: User? = null
+    private var inDetailUser: DetailUser? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,19 +86,21 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun onDetailsReceived(result: Resource<User>) {
+    private fun onDetailsReceived(result: Resource<DetailUser>) {
         when (result) {
             is Resource.Loading -> showLoading(true)
             is Resource.Error -> {
                 errorOccurred()
                 binding.detailNoInternet.visibility = View.VISIBLE
                 binding.detailNoInternet.text = getString(R.string.error)
+                binding.favorite.visibility = View.INVISIBLE
                 showLoading(false)
             }
 
             is Resource.Success -> {
                 parseUserDetail(result.data)
                 setTabLayoutAdapter()
+                binding.favorite.visibility = View.VISIBLE
                 showLoading(false)
                 result.data.let { userDetail ->
                     inDetailUser = userDetail
@@ -107,7 +109,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun parseUserDetail(user: User?) {
+    private fun parseUserDetail(user: DetailUser?) {
         binding.apply {
             detailUsername.setAndVisible(user!!.login)
             detailFollowersValue.setAndVisible(user.followers.toString())
@@ -144,6 +146,7 @@ class DetailActivity : AppCompatActivity() {
             binding.apply {
                 progressBar.visibility = View.VISIBLE
                 detailViewPager.visibility = View.INVISIBLE
+                binding.favorite.visibility = View.INVISIBLE
             }
         } else {
             binding.apply {

@@ -1,11 +1,9 @@
 <resources>
     <string name="app_name">GithubAppClean</string>
     <string name="github">Github</string>
-    <string name="username">Username</string>
     <string name="imageProfile">Image Profile</string>
     <string name="no_internet">No Internet Connection</string>
     <string name="text_failed_load">Failed to load</string>
-    <string name="profile_image">Image Profile</string>
     <string name="name">Name</string>
     <string name="company">Company</string>
     <string name="location">Location</string>
@@ -30,4 +28,6 @@
     <string name="search_user">Search User</string>
     <string name="cancel">Cancel</string>
     <string name="favorites">Favorites</string>
+    <string name="title_favorite">Module Title</string>
+    <string name="empty">" "</string>
 </resources>

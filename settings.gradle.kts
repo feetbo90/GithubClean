@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "GithubAppClean"
 include(":app")
- 
+include(":core")
+include(":favorite")

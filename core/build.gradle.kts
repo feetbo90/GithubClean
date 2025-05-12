@@ -23,6 +23,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "MY_API_TOKEN", "\"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\"")
+            buildConfigField("String", "MY_BASE_URL", "\"https://api.github.com/\"")
         }
         debug {
             buildConfigField("String", "MY_API_TOKEN", "\"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\"")

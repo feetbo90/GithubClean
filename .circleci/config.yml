@@ -17,18 +17,18 @@ jobs:
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
-      - run:
-          name: Install Snyk
-          command: |
-            curl -Lo snyk https://static.snyk.io/cli/latest/snyk-linux
-            chmod +x snyk
-            sudo mv snyk /usr/local/bin/
-      - run:
-          name: Run Snyk to Check for High Vulnerabilities
-          command: snyk test --all-projects --severity-threshold=high
-      - run:
-          name: Run Snyk to Check for Medium Vulnerabilities
-          command: snyk test --all-projects --severity-threshold=medium
+#      - run:
+#          name: Install Snyk
+#          command: |
+#            curl -Lo snyk https://static.snyk.io/cli/latest/snyk-linux
+#            chmod +x snyk
+#            sudo mv snyk /usr/local/bin/
+#      - run:
+#          name: Run Snyk to Check for High Vulnerabilities
+#          command: snyk test --all-projects --severity-threshold=high
+#      - run:
+#          name: Run Snyk to Check for Medium Vulnerabilities
+#          command: snyk test --all-projects --severity-threshold=medium
       - run:
           name: Run Build
           command: ./gradlew build

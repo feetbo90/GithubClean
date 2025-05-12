@@ -5,13 +5,16 @@
     android:orientation="vertical"
     android:padding="24dp">
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/editTextInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:hint="@string/input_text"
         android:inputType="text"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:textColor="#333333"
+        android:maxWidth="488dp" />
+
 
 </LinearLayout>

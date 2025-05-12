@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     id("kotlin-parcelize")
-    id("androidx.navigation.safeargs")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -82,6 +82,4 @@ dependencies {
     androidTestImplementation(libs.room.testing)
 
     debugImplementation(libs.leakcanary)
-
-
 }

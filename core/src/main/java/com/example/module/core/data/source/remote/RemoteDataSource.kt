@@ -66,16 +66,6 @@ class RemoteDataSource(private val apiService: ApiService) {
         emit(ApiResponse.Error(e.toString()))
     }
 
-    fun getUserFollowing(id: String): Flow<ApiResponse<ArrayList<SimpleUser>>> = flow {
-        try {
-            val users = apiService.getFollowingList(id)
-            emit(ApiResponse.Success(users))
-        } catch (e: Exception) {
-            Log.d(TAG, "getUserFollowing: ${e.message.toString()}")
-            emit(ApiResponse.Error(e.message.toString()))
-        }
-    }
-
     companion object {
         private val TAG = RemoteDataSource::class.java.simpleName
     }

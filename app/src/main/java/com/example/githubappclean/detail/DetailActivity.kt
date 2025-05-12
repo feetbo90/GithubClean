@@ -27,7 +27,6 @@ import kotlin.toString
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private var person: String? = null
-    private var id: Int? = null
     private val detailViewModel: DetailViewModel by viewModel()
     private var isFavorite: Boolean = false
     private var inDetailUser: DetailUser? = null
@@ -37,7 +36,6 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         person = intent.extras?.getString(MainActivity.PARCEL_LOGIN) as String
-        id = intent.extras?.getInt(MainActivity.PARCEL_ID) as Int
         lifecycleScope.launch {
             launch {
                 detailViewModel.getDetails(person.toString())

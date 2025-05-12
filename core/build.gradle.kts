@@ -23,11 +23,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "MY_API_TOKEN", "\"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\"")
+            buildConfigField("String", "MY_API_TOKEN", "\"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\"")
             buildConfigField("String", "MY_BASE_URL", "\"https://api.github.com/\"")
         }
         debug {
-            buildConfigField("String", "MY_API_TOKEN", "\"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\"")
+            buildConfigField("String", "MY_API_TOKEN", "\"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\"")
             buildConfigField("String", "MY_BASE_URL", "\"https://api.github.com/\"")
         }
     }
@@ -68,4 +68,6 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     api(libs.koin.android)
+    implementation(libs.android.database.sqlcipher)
+    implementation(libs.androidx.sqlite.ktx)
 }

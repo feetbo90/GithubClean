@@ -15,9 +15,6 @@
             android:id="@+id/action_mainFragment_to_searchFragment"
             app:destination="@id/searchFragment">
         </action>
-        <argument
-            android:name="parcel_search"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"

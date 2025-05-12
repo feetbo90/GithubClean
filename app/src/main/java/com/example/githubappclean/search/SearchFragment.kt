@@ -17,8 +17,11 @@ import com.example.module.core.ui.SearchAdapter
 import com.example.githubappclean.databinding.FragmentSearchBinding
 import com.example.githubappclean.detail.DetailActivity
 import com.example.module.core.domain.model.SimpleUsers
+import com.example.module.core.utils.UserImageLoader
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.getValue
 
 
 class SearchFragment : Fragment() {
@@ -26,6 +29,7 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
     private val searchViewModel: SearchViewModel by viewModel()
+    private val imageLoader: UserImageLoader by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +60,7 @@ class SearchFragment : Fragment() {
         when (result) {
             is Resource.Loading -> showLoading(true)
             is Resource.Success -> {
-                val githubAdapter = result.data?.let { SearchAdapter(it) }
+                val githubAdapter = result.data?.let { SearchAdapter(it, imageLoader) }
 
                 binding.myUsers.apply {
                     layoutManager = LinearLayoutManager(requireContext())

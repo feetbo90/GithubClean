@@ -9,6 +9,8 @@ import com.example.module.core.data.source.remote.RemoteDataSource
 import com.example.module.core.data.source.remote.network.ApiService
 import com.example.module.core.domain.repository.IGithubRepository
 import com.example.module.core.utils.AppExecutors
+import com.example.module.core.utils.DataMapper
+import com.example.module.core.utils.UserImageLoader
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -23,7 +25,7 @@ val databaseModule = module {
         Room.databaseBuilder(
             androidContext(),
             GithubDatabase::class.java, "Github.db"
-        ).fallbackToDestructiveMigration().build()
+        ).build()
     }
 }
 
@@ -48,6 +50,9 @@ val networkModule = module {
 val repositoryModule = module {
     single { LocalDataSource(get()) }
     single { RemoteDataSource(get()) }
+    single { DataMapper }
+    single { UserImageLoader() }
+
     factory { AppExecutors() }
-    single<IGithubRepository> { GithubRepository(get(), get(), get()) }
+    single<IGithubRepository> { GithubRepository(get(), get(), get(), get()) }
 }

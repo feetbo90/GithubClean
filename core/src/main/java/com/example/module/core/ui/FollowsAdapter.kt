@@ -3,12 +3,11 @@ package com.example.module.core.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.module.core.R
 import com.example.module.core.databinding.CardItemBinding
 import com.example.module.core.domain.model.SimpleUsers
+import com.example.module.core.utils.UserImageLoader
 
-class FollowsAdapter(private val listUser: List<SimpleUsers>) : RecyclerView.Adapter<FollowsAdapter.ListViewHolder>() {
+class FollowsAdapter(private val listUser: List<SimpleUsers>, private val imageLoader: UserImageLoader) : RecyclerView.Adapter<FollowsAdapter.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -24,11 +23,7 @@ class FollowsAdapter(private val listUser: List<SimpleUsers>) : RecyclerView.Ada
         val users = listUser[position]
         holder.binding.apply {
             usernameText.text = users.login
-            Glide
-                .with(holder.itemView.context)
-                .load(users.avatarUrl)
-                .placeholder(R.drawable.ic_baseline_person)
-                .into(imageProfile)
+            imageLoader.loadImage(holder.itemView.context, users.avatarUrl, imageProfile)
         }
         holder.itemView.setOnClickListener {
             val position = holder.bindingAdapterPosition

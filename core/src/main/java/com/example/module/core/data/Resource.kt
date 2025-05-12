@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.example.module.core.data
 
 sealed class Resource<T>(val data: T? = null, val message: String? = null) {

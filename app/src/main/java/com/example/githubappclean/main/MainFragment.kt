@@ -25,6 +25,9 @@ import androidx.core.net.toUri
 import androidx.core.view.MenuProvider
 import androidx.navigation.fragment.findNavController
 import com.example.githubappclean.databinding.DialogSearchBinding
+import com.example.module.core.utils.UserImageLoader
+import org.koin.android.ext.android.inject
+import kotlin.getValue
 
 
 class MainFragment : Fragment() {
@@ -32,6 +35,7 @@ class MainFragment : Fragment() {
     private val mainViewModel: MainViewModel by viewModel()
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
+    private val imageLoader: UserImageLoader by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +59,7 @@ class MainFragment : Fragment() {
         when (result) {
             is Resource.Loading -> showLoading(true)
             is Resource.Success -> {
-                val githubAdapter = result.data?.let { GithubAdapter(it) }
+                val githubAdapter = result.data?.let { GithubAdapter(it, imageLoader) }
                 binding.myUsers.apply {
                     layoutManager = LinearLayoutManager(requireContext())
                     adapter = githubAdapter

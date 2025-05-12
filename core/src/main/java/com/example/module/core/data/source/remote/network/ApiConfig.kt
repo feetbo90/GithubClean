@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.example.module.core.data.source.remote.network
 
 import com.example.module.core.BuildConfig

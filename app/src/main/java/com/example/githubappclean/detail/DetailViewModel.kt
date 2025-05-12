@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.module.core.data.Resource
-import com.example.module.core.data.source.remote.response.User
 import com.example.module.core.domain.model.DetailUser
 import com.example.module.core.domain.usecase.GithubUseCase
 import kotlinx.coroutines.flow.Flow

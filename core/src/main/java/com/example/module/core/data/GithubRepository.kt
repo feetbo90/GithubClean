@@ -21,15 +21,17 @@ import kotlinx.coroutines.flow.map
 class GithubRepository(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
-    private val appExecutors: AppExecutors
+    private val appExecutors: AppExecutors,
+    private val dataMapper: DataMapper
 ): IGithubRepository {
+
     override fun searchUser(query: String): Flow<Resource<List<SimpleUsers>>> = flow {
         emit(Resource.Loading()) // emit loading state
 
         remoteDataSource.searchUser(query).collect { response ->
             when (response) {
                 is ApiResponse.Success -> {
-                    val users = DataMapper.mapResponseSimpleToDomain(response.data)
+                    val users = dataMapper.mapResponseSimpleToDomain(response.data)
                     emit(Resource.Success(users))
                 }
                 is ApiResponse.Empty -> {
@@ -50,7 +52,7 @@ class GithubRepository(
     override fun getGithubUser(): Flow<Resource<List<UserGithub>>> =
         object : NetworkBoundResource<List<UserGithub>, List<UserGithubResponse>>() {
             override fun loadFromDB(): Flow<List<UserGithub>> {
-                return localDataSource.getGithubUsers().map { DataMapper.mapEntitiesToDomainNewGithub(it) }
+                return localDataSource.getGithubUsers().map { dataMapper.mapEntitiesToDomainNewGithub(it) }
             }
 
             override fun shouldFetch(data: List<UserGithub>?): Boolean =
@@ -60,7 +62,7 @@ class GithubRepository(
                 remoteDataSource.getGithubUsers()
 
             override suspend fun saveCallResult(data: List<UserGithubResponse>) {
-                val githubList = DataMapper.mapResponsesGithubUserToEntities(data)
+                val githubList = dataMapper.mapResponsesGithubUserToEntities(data)
                 localDataSource.insertGithubUser(githubList)
             }
 
@@ -71,7 +73,7 @@ class GithubRepository(
         remoteDataSource.getDetailUsers(username).collect { response ->
             when (response) {
                 is ApiResponse.Success -> {
-                    val user = DataMapper.mapResponseToDomainUser(response.data)
+                    val user = dataMapper.mapResponseToDomainUser(response.data)
 
                     emit(Resource.Success(user))
                 }
@@ -100,7 +102,7 @@ class GithubRepository(
         remoteDataSource.getUserFollowers(id).collect { response ->
             when (response) {
                 is ApiResponse.Success -> {
-                    val followers = DataMapper.mapResponseSimpleToDomain(response.data)
+                    val followers = dataMapper.mapResponseSimpleToDomain(response.data)
                     emit(Resource.Success(followers))
                 }
                 is ApiResponse.Empty -> {
@@ -118,11 +120,11 @@ class GithubRepository(
     }.flowOn(Dispatchers.IO)
 
     override fun getFavoriteUsers(): Flow<List<SimpleUsers>> {
-        return localDataSource.getFavoriteUsers().map { DataMapper.mapEntitiesToDomainUser(it) }
+        return localDataSource.getFavoriteUsers().map { dataMapper.mapEntitiesToDomainUser(it) }
     }
 
     override fun setFavoriteUser(user: DetailUser, state: Boolean) {
-        val userEntity = DataMapper.mapDomainToEntity(user, state)
+        val userEntity = dataMapper.mapDomainToEntity(user, state)
         appExecutors.diskIO().execute { localDataSource.setFavoriteUser(userEntity, state) }
     }
 

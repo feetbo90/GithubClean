@@ -28,9 +28,6 @@ interface ApiService {
     @Headers("Authorization: token $API_TOKEN", "UserResponse-Agent: request")
     suspend fun getFollowersList(@Path("username") username: String): ArrayList<SimpleUser>
 
-    @GET("users/{username}/following")
-    @Headers("Authorization: token $API_TOKEN", "UserResponse-Agent: request")
-    suspend fun getFollowingList(@Path("username") username: String): ArrayList<SimpleUser>
 
     companion object {
         private const val API_TOKEN = BuildConfig.MY_API_TOKEN

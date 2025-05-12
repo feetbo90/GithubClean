@@ -18,7 +18,9 @@ import com.example.module.core.ui.FollowsAdapter
 import com.example.githubappclean.databinding.FragmentFollowsBinding
 import com.example.githubappclean.detail.DetailActivity
 import com.example.module.core.domain.model.SimpleUsers
+import com.example.module.core.utils.UserImageLoader
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.getValue
 
@@ -32,7 +34,7 @@ class FollowsFragment : Fragment() {
     private var _binding: FragmentFollowsBinding? = null
     private val binding get() = _binding!!
     private val followsViewModel: FollowsViewModel by viewModel()
-
+    private val imageLoader: UserImageLoader by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +47,6 @@ class FollowsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val index = arguments?.getInt(ARG_SECTION_NUMBER, 0)
         val username = arguments?.getString(ARG_USERNAME, "")
 
         username?.let {
@@ -98,7 +99,7 @@ class FollowsFragment : Fragment() {
     private fun showFollows(users: List<SimpleUsers>?) {
         if (users?.isNotEmpty()!!) {
             val linearLayoutManager = LinearLayoutManager(activity)
-            val listAdapter = FollowsAdapter(users)
+            val listAdapter = FollowsAdapter(users, imageLoader)
 
             binding.users.apply {
                 layoutManager = linearLayoutManager

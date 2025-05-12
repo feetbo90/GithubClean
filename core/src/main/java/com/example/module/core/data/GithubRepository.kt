@@ -4,9 +4,9 @@ import android.util.Log
 import com.example.module.core.data.source.local.LocalDataSource
 import com.example.module.core.data.source.remote.RemoteDataSource
 import com.example.module.core.data.source.remote.network.ApiResponse
-import com.example.module.core.data.source.remote.response.SimpleUser
-import com.example.module.core.data.source.remote.response.User
 import com.example.module.core.data.source.remote.response.UserGithubResponse
+import com.example.module.core.domain.model.DetailUser
+import com.example.module.core.domain.model.SimpleUsers
 import com.example.module.core.domain.model.UserGithub
 import com.example.module.core.domain.repository.IGithubRepository
 import com.example.module.core.utils.AppExecutors
@@ -23,14 +23,14 @@ class GithubRepository(
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ): IGithubRepository {
-    override fun searchUser(query: String): Flow<Resource<List<SimpleUser>>> = flow {
+    override fun searchUser(query: String): Flow<Resource<List<SimpleUsers>>> = flow {
         emit(Resource.Loading()) // emit loading state
 
         remoteDataSource.searchUser(query).collect { response ->
             when (response) {
                 is ApiResponse.Success -> {
-                    val followers = response.data
-                    emit(Resource.Success(followers))
+                    val users = DataMapper.mapResponseSimpleToDomain(response.data)
+                    emit(Resource.Success(users))
                 }
                 is ApiResponse.Empty -> {
                     emit(Resource.Error("Tidak ada data followers"))
@@ -66,12 +66,13 @@ class GithubRepository(
 
         }.asFlow()
 
-    override fun getDetailUser(username: String): Flow<Resource<User>> = flow {
+    override fun getDetailUser(username: String): Flow<Resource<DetailUser>> = flow {
         emit(Resource.Loading())
         remoteDataSource.getDetailUsers(username).collect { response ->
             when (response) {
                 is ApiResponse.Success -> {
-                    val user = response.data
+                    val user = DataMapper.mapResponseToDomainUser(response.data)
+
                     emit(Resource.Success(user))
                 }
                 is ApiResponse.Empty -> {
@@ -93,13 +94,13 @@ class GithubRepository(
             .flowOn(Dispatchers.IO)
     }
 
-    override fun getUserFollowers(id: String): Flow<Resource<List<SimpleUser>>> = flow {
+    override fun getUserFollowers(id: String): Flow<Resource<List<SimpleUsers>>> = flow {
         emit(Resource.Loading()) // emit loading state
 
         remoteDataSource.getUserFollowers(id).collect { response ->
             when (response) {
                 is ApiResponse.Success -> {
-                    val followers = response.data
+                    val followers = DataMapper.mapResponseSimpleToDomain(response.data)
                     emit(Resource.Success(followers))
                 }
                 is ApiResponse.Empty -> {
@@ -116,11 +117,11 @@ class GithubRepository(
         emit(Resource.Error(e.message ?: "Unknown error"))
     }.flowOn(Dispatchers.IO)
 
-    override fun getFavoriteUsers(): Flow<List<SimpleUser>> {
+    override fun getFavoriteUsers(): Flow<List<SimpleUsers>> {
         return localDataSource.getFavoriteUsers().map { DataMapper.mapEntitiesToDomainUser(it) }
     }
 
-    override fun setFavoriteUser(user: User, state: Boolean) {
+    override fun setFavoriteUser(user: DetailUser, state: Boolean) {
         val userEntity = DataMapper.mapDomainToEntity(user, state)
         appExecutors.diskIO().execute { localDataSource.setFavoriteUser(userEntity, state) }
     }

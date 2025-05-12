@@ -81,4 +81,7 @@ dependencies {
     ksp(libs.room.compiler)
     androidTestImplementation(libs.room.testing)
 
+    debugImplementation(libs.leakcanary)
+
+
 }

@@ -12,11 +12,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubappclean.MainActivity
+import com.example.githubappclean.R
 import com.example.module.core.data.Resource
-import com.example.module.core.data.source.remote.response.SimpleUser
 import com.example.module.core.ui.FollowsAdapter
 import com.example.githubappclean.databinding.FragmentFollowsBinding
 import com.example.githubappclean.detail.DetailActivity
+import com.example.module.core.domain.model.SimpleUsers
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.getValue
@@ -44,18 +45,16 @@ class FollowsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val index = arguments?.getInt(ARG_SECTION_NUMBER, 0)
+//        val index = arguments?.getInt(ARG_SECTION_NUMBER, 0)
         val username = arguments?.getString(ARG_USERNAME, "")
 
-        if (index == 1) {
-            username?.let {
-                val mIndex = 1
-                setViewModel(it, mIndex)
-            }
+        username?.let {
+            setViewModel(it)
         }
+
     }
 
-    private fun goToDetail(user: SimpleUser) {
+    private fun goToDetail(user: SimpleUsers) {
         Intent(activity, DetailActivity::class.java).apply {
             putExtra(MainActivity.PARCEL_LOGIN, user.login)
         }.also {
@@ -63,27 +62,27 @@ class FollowsFragment : Fragment() {
         }
     }
 
-    private fun setViewModel(username: String, index: Int) {
-        if (index == 1) {
-            viewLifecycleOwner.lifecycleScope.launch {
-                viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                    followsViewModel.getUserFollowers(username).observe(viewLifecycleOwner) { followers ->
+    private fun setViewModel(username: String) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
+                followsViewModel.getUserFollowers(username)
+                    .observe(viewLifecycleOwner) { followers ->
                         Log.d(TAG, "followers $followers")
                         onFollowsResultReceived(followers)
                     }
-                }
             }
         }
     }
 
-    private fun onFollowsResultReceived(result: Resource<List<SimpleUser>>) {
+    private fun onFollowsResultReceived(result: Resource<List<SimpleUsers>>) {
         when (result) {
             is Resource.Loading -> showLoading(true)
             is Resource.Error -> {
                 binding.status.visibility = View.VISIBLE
-                binding.status.text = "An Error is Occurred"
+                binding.status.text = getString(R.string.error)
                 showLoading(false)
             }
+
             is Resource.Success -> {
                 showFollows(result.data)
                 showLoading(false)
@@ -96,7 +95,7 @@ class FollowsFragment : Fragment() {
         else binding.loading.visibility = View.GONE
     }
 
-    private fun showFollows(users: List<SimpleUser>?) {
+    private fun showFollows(users: List<SimpleUsers>?) {
         if (users?.isNotEmpty()!!) {
             val linearLayoutManager = LinearLayoutManager(activity)
             val listAdapter = FollowsAdapter(users)
@@ -109,7 +108,7 @@ class FollowsFragment : Fragment() {
 
             listAdapter.setOnItemClickCallback(object :
                 FollowsAdapter.OnItemClickCallback {
-                override fun onItemClicked(data: SimpleUser) {
+                override fun onItemClicked(data: SimpleUsers) {
                     goToDetail(data)
                 }
 

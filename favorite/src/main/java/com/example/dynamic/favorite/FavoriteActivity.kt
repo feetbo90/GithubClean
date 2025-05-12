@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dynamic.favorite.databinding.ActivityFavoriteBinding
 import com.example.dynamic.favorite.di.favoritesModule
-import com.example.module.core.data.source.remote.response.SimpleUser
 import com.example.module.core.ui.SearchAdapter
 import com.example.githubappclean.detail.DetailActivity
+import com.example.module.core.domain.model.SimpleUsers
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import kotlin.getValue
@@ -29,7 +29,7 @@ class FavoriteActivity : AppCompatActivity() {
         }
     }
 
-    private fun showRecycle(result: List<SimpleUser>?) {
+    private fun showRecycle(result: List<SimpleUsers>?) {
 
                 val githubAdapter = result?.let { SearchAdapter(it) }
 
@@ -41,7 +41,7 @@ class FavoriteActivity : AppCompatActivity() {
 
                 githubAdapter?.setOnItemClickCallback(object :
                     SearchAdapter.OnItemClickCallback {
-                    override fun onItemClicked(data: SimpleUser) {
+                    override fun onItemClicked(data: SimpleUsers) {
                         Intent(
                             this@FavoriteActivity,
                             DetailActivity::class.java

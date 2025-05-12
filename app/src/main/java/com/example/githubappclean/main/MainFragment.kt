@@ -44,10 +44,6 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (requireActivity() as? androidx.appcompat.app.AppCompatActivity)?.apply {
-            setSupportActionBar(binding.myToolbar)
-            supportActionBar?.setDisplayShowTitleEnabled(false)
-        }
         requireActivity().addMenuProvider(menuProvider, viewLifecycleOwner)
 
         mainViewModel.githubUser.observe(viewLifecycleOwner) { githubUser ->

@@ -13,10 +13,10 @@ import com.example.githubappclean.MainActivity
 import com.example.githubappclean.MainActivity.Companion.PARCEL_LOGIN
 import com.example.githubappclean.R
 import com.example.module.core.data.Resource
-import com.example.module.core.data.source.remote.response.SimpleUser
 import com.example.module.core.ui.SearchAdapter
 import com.example.githubappclean.databinding.FragmentSearchBinding
 import com.example.githubappclean.detail.DetailActivity
+import com.example.module.core.domain.model.SimpleUsers
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -52,7 +52,7 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
-    private fun showRecycle(result: Resource<List<SimpleUser>>?) {
+    private fun showRecycle(result: Resource<List<SimpleUsers>>?) {
         when (result) {
             is Resource.Loading -> showLoading(true)
             is Resource.Success -> {
@@ -66,7 +66,7 @@ class SearchFragment : Fragment() {
 
                 githubAdapter?.setOnItemClickCallback(object :
                     SearchAdapter.OnItemClickCallback {
-                    override fun onItemClicked(data: SimpleUser) {
+                    override fun onItemClicked(data: SimpleUsers) {
                         Intent(
                             activity,
                             DetailActivity::class.java

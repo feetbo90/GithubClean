@@ -2,4 +2,5 @@
 <resources>
     <string name="profile_image">Image Profile</string>
     <string name="username">Username</string>
+    <string name="imageProfile">Image Profile</string>
 </resources>

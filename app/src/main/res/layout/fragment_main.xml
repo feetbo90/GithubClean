@@ -5,24 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorOnPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/github_logo"
-            android:layout_gravity="start|center_vertical"
-            android:contentDescription="@string/github"
-            style="@style/Logo"
-            />
-
-    </androidx.appcompat.widget.Toolbar>
-
     <ProgressBar
         android:id="@+id/my_loading"
         android:layout_width="wrap_content"
@@ -47,12 +29,13 @@
         android:id="@+id/my_users"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="70dp"
         android:contentDescription="@string/list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         tools:itemCount="10"
         tools:listitem="@layout/github_card" />

@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.module.core.R
-import com.example.module.core.data.source.remote.response.SimpleUser
 import com.example.module.core.databinding.CardItemBinding
+import com.example.module.core.domain.model.SimpleUsers
 
-class FollowsAdapter(private val listUser: List<SimpleUser>) : RecyclerView.Adapter<FollowsAdapter.ListViewHolder>() {
+class FollowsAdapter(private val listUser: List<SimpleUsers>) : RecyclerView.Adapter<FollowsAdapter.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -43,6 +43,6 @@ class FollowsAdapter(private val listUser: List<SimpleUser>) : RecyclerView.Adap
     class ListViewHolder(var binding: CardItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: SimpleUser)
+        fun onItemClicked(data: SimpleUsers)
     }
 }

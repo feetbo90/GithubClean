@@ -47,7 +47,7 @@ data class User(
     val publicRepos: Int,
 
     @field:SerializedName("is_favorite")
-    val isFavorite: Boolean?
+        val isFavorite: Boolean?
 )
 
 data class SimpleUser(

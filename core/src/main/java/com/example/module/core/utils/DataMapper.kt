@@ -5,18 +5,28 @@ import com.example.module.core.data.source.local.entity.UserGithubEntity
 import com.example.module.core.data.source.remote.response.SimpleUser
 import com.example.module.core.data.source.remote.response.User
 import com.example.module.core.data.source.remote.response.UserGithubResponse
+import com.example.module.core.domain.model.DetailUser
 import com.example.module.core.domain.model.SimpleUsers
 import com.example.module.core.domain.model.UserGithub
+import kotlin.collections.List
 
 object DataMapper {
-    fun mapEntitiesToDomain(input: List<SimpleUserEntity>): List<SimpleUsers> =
-        input.map {
-            SimpleUsers(
-                id = it.id.toString(),
-                avatarUrl = it.avatarUrl,
-                login = it.login,
-            )
-        }
+
+    fun mapResponseToDomainUser(it: User) = DetailUser(
+        id = it.id,
+        bio = it.bio,
+        login = it.login,
+        blog = it.blog,
+        followers = it.followers,
+        avatarUrl = it.avatarUrl,
+        htmlUrl = it.htmlUrl,
+        following = it.following,
+        name = it.name,
+        company = it.company,
+        location = it.location,
+        publicRepos = it.publicRepos,
+        isFavorite = it.isFavorite
+    )
 
     fun mapEntitiesToDomainNewGithub(input: List<UserGithubEntity>): List<UserGithub> =
         input.map {
@@ -75,18 +85,28 @@ object DataMapper {
     }
 
 
-    fun mapEntitiesToDomainUser(input: List<SimpleUserEntity>): List<SimpleUser> =
+    fun mapEntitiesToDomainUser(input: List<SimpleUserEntity>): List<SimpleUsers> =
         input.map {
-            SimpleUser(
+            SimpleUsers(
                 login = it.login,
-                avatarUrl = it.avatarUrl
+                avatarUrl = it.avatarUrl,
+                id = it.id
             )
         }
 
-    fun mapDomainToEntity(it: User, state: Boolean) = SimpleUserEntity(
+    fun mapDomainToEntity(it: DetailUser, state: Boolean) = SimpleUserEntity(
         id = it.id,
         login = it.login,
         avatarUrl = it.avatarUrl,
         isFavorite = state
     )
+
+    fun mapResponseSimpleToDomain(it: List<SimpleUser>): List<SimpleUsers> =
+        it.map {
+            SimpleUsers(
+                id = it.id,
+                login = it.login,
+                avatarUrl = it.avatarUrl,
+            )
+        }
 }

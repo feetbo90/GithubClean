@@ -21,5 +21,6 @@ data class UserGithub(
     val id: Int? = null,
     val gravatarId: String? = null,
     val nodeId: String? = null,
-    val organizationsUrl: String? = null
+    val organizationsUrl: String? = null,
+    val isFavorite: Boolean? = null
 )

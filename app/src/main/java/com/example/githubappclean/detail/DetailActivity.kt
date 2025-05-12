@@ -14,9 +14,9 @@ import com.bumptech.glide.Glide
 import com.example.githubappclean.MainActivity
 import com.example.githubappclean.R
 import com.example.module.core.data.Resource
-import com.example.module.core.data.source.remote.response.User
 import com.example.githubappclean.databinding.ActivityDetailBinding
 import com.example.githubappclean.follows.SectionPageAdapter
+import com.example.module.core.domain.model.DetailUser
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
@@ -30,7 +30,7 @@ class DetailActivity : AppCompatActivity() {
     private var id: Int? = null
     private val detailViewModel: DetailViewModel by viewModel()
     private var isFavorite: Boolean = false
-    private var inDetailUser: User? = null
+    private var inDetailUser: DetailUser? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +86,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun onDetailsReceived(result: Resource<User>) {
+    private fun onDetailsReceived(result: Resource<DetailUser>) {
         when (result) {
             is Resource.Loading -> showLoading(true)
             is Resource.Error -> {
@@ -109,7 +109,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun parseUserDetail(user: User?) {
+    private fun parseUserDetail(user: DetailUser?) {
         binding.apply {
             detailUsername.setAndVisible(user!!.login)
             detailFollowersValue.setAndVisible(user.followers.toString())

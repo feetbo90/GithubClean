@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class RemoteDataSource constructor(private val apiService: ApiService) {
+class RemoteDataSource(private val apiService: ApiService) {
 
     fun searchUser(query: String): Flow<ApiResponse<List<SimpleUser>>> = flow {
         val users = apiService.getUserList(query).items

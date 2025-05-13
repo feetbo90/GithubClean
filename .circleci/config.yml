@@ -26,7 +26,7 @@ jobs:
       - run:
           name: Check SNYK_TOKEN availability
           command:
-            echo "SNYK_TOKEN is: ${SNYK_TOKEN:0:5}********"
+            echo "SNYK_TOKEN is: ${SNYK_TOKEN:0:5}"
       - run:
           name: Authenticate Snyk with token
           command: snyk auth $SNYK_TOKEN

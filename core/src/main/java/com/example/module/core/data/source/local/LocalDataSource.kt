@@ -16,8 +16,6 @@ class LocalDataSource (private val githubDao: GithubDao){
 
     fun isFavoriteUser(id: String): Flow<Boolean> = githubDao.isFavoriteUser(id)
 
-//    fun getAllUsers(): Flow<List<SimpleUserEntity>> = githubDao.getAllUsers()
-
     fun getGithubUsers(): Flow<List<UserGithubEntity>> = githubDao.getGithubUsers()
 
     suspend fun insertGithubUser(userList: List<UserGithubEntity>) = githubDao.insertGithubUser(userList)

@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.ksp)
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    alias(libs.plugins.kover)
 }
 
 android {
@@ -22,11 +23,15 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
@@ -72,6 +77,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    testImplementation(libs.core.testing)
+    testImplementation(libs.kotlinx.coroutines.test)
+
     implementation(libs.recyclerview)
     implementation(libs.material)
     implementation(libs.glide)
@@ -82,4 +90,31 @@ dependencies {
     androidTestImplementation(libs.room.testing)
 
     debugImplementation(libs.leakcanary)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline)
+}
+
+kover {
+    reports {
+        // filters for all report types of all build variants
+        filters {
+            excludes {
+                androidGeneratedClasses()
+            }
+        }
+
+        variant("release") {
+            // filters for all report types only of 'release' build type
+            filters {
+                excludes {
+                    androidGeneratedClasses()
+
+                    classes(
+                        // excludes debug classes
+                        "*.DebugUtil"
+                    )
+                }
+            }
+        }
+    }
 }

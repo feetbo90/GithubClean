@@ -18,17 +18,20 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
             buildConfigField("String", "MY_API_TOKEN", "\"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\"")
             buildConfigField("String", "MY_BASE_URL", "\"https://api.github.com/\"")
+            buildConfigField("String", "MY_KEY_DB", "\"my_github\"")
         }
         debug {
+            isMinifyEnabled = false
             buildConfigField("String", "MY_API_TOKEN", "\"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\"")
             buildConfigField("String", "MY_BASE_URL", "\"https://api.github.com/\"")
+            buildConfigField("String", "MY_KEY_DB", "\"my_github\"")
         }
     }
     compileOptions {
@@ -46,10 +49,19 @@ android {
 
 dependencies {
 
+    debugImplementation(libs.mockito.core)
+    debugImplementation(libs.mockito.inline)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
+    testImplementation(libs.room.testing)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.turbine)
+    testImplementation(libs.core.testing)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 

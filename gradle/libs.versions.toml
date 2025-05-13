@@ -15,7 +15,7 @@ fragmentKtx = "1.8.6"
 androidxJunit = "1.2.1"
 recyclerview = "1.4.0"
 glide = "4.16.0"
-room = "2.7.1"
+room = "2.6.1"
 retrofit = "2.11.0"
 loggingInterceptor = "4.12.0"
 rxjava = "3.1.9"
@@ -30,8 +30,20 @@ nav = "2.9.0"
 leakcanary = "2.10"
 androidDatabaseSqlcipher = "4.5.4"
 sqliteKtx = "2.5.1"
+mockitoCore = "3.12.4"
+mockitoInline = "3.12.4"
+junitJupiter = "5.8.1"
+mockito-kotlin = "4.1.0"
+turbine = "0.12.1"
+core-testing = "2.1.0"
+kover = "0.8.2"
 
 [libraries]
+core-testing = { module = "androidx.arch.core:core-testing", version.ref = "core-testing" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
+mockito_core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
+mockito_inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoInline" }
 android-database-sqlcipher = { module = "net.zetetic:android-database-sqlcipher", version.ref = "androidDatabaseSqlcipher" }
 androidx-sqlite-ktx = { module = "androidx.sqlite:sqlite-ktx", version.ref = "sqliteKtx" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -59,6 +71,9 @@ androidx-room-rxjava3 = { module = "androidx.room:room-rxjava3", version.ref = "
 androidx-lifecycle-reactivestreams-ktx = { module = "androidx.lifecycle:lifecycle-reactivestreams-ktx", version.ref = "lifecycleReactivestreamsKtx" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
@@ -67,6 +82,7 @@ navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-kt
 navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "nav" }
 
 leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -75,3 +91,4 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
 android-library = { id = "com.android.library", version.ref = "agp" }
 android-dynamic-feature = { id = "com.android.dynamic-feature", version.ref = "agp" }
 navigation-safe-args = { id = "androidx.navigation.safeargs", version.ref = "nav" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }

@@ -19,3 +19,20 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-dontwarn java.lang.invoke.StringConcatFactory
+
+-keep class com.example.module.core.di.** { *; }
+-keepclassmembers class com.example.module.core.di.** { *; }
+
+-keep class com.example.module.core.domain.** { *; }
+-keepclassmembers class com.example.module.core.domain.** { *; }
+
+-keep class com.example.module.core.utils.** { *; }
+-keepclassmembers class com.example.module.core.utils.** { *; }
+
+-keep class com.example.module.core.ui.** { *; }
+-keepclassmembers class com.example.module.core.ui.** { *; }
+
+-keep class com.example.module.core.data.** { *; }
+-keepclassmembers class com.example.module.core.data.** { *; }

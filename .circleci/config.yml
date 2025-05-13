@@ -24,6 +24,9 @@ jobs:
             chmod +x snyk
             sudo mv snyk /usr/local/bin/
       - run:
+          name: Authenticate Snyk with token
+          command: snyk auth $SNYK_TOKEN
+      - run:
           name: Run Snyk to Check for High Vulnerabilities
           command: snyk test --all-projects --severity-threshold=high
       - run:

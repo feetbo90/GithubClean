@@ -24,6 +24,10 @@ jobs:
             chmod +x snyk
             sudo mv snyk /usr/local/bin/
       - run:
+          name: Check SNYK_TOKEN availability
+          command:
+            echo "SNYK_TOKEN is: ${SNYK_TOKEN:0:5}********"
+      - run:
           name: Authenticate Snyk with token
           command: snyk auth $SNYK_TOKEN
       - run:

@@ -18,18 +18,15 @@ jobs:
           name: Download Dependencies
           command: ./gradlew androidDependencies
       - run:
+          name: Authenticate Snyk with token
+          command: snyk auth $SNYK_TOKEN
+      - run:
           name: Install Snyk
           command: |
             curl -Lo snyk https://static.snyk.io/cli/latest/snyk-linux
             chmod +x snyk
             sudo mv snyk /usr/local/bin/
-      - run:
-          name: Check SNYK_TOKEN availability
-          command:
-            echo "SNYK_TOKEN is: ${SNYK_TOKEN:0:5}"
-      - run:
-          name: Authenticate Snyk with token
-          command: snyk auth $SNYK_TOKEN
+
       - run:
           name: Run Snyk to Check for High Vulnerabilities
           command: snyk test --all-projects --severity-threshold=high
